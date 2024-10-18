@@ -1,7 +1,6 @@
-const APILINK = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=e88cb4b5ec27082e850c077a4938759e&page=1';
-const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
-const SEARCHAPI = 'https://api.themoviedb.org/3/search/movie?&api_key=e88cb4b5ec27082e850c077a4938759e';
-
+const APILINK = '';
+const IMG_PATH = '';
+const SEARCHAPI = '';
 
 const main = document.getElementById("section");
 const form = document.getElementById("form");
@@ -10,7 +9,7 @@ const search = document.getElementById("query");
 returnMovies(APILINK)
 
 function returnMovies(url){
-    fetch(url).then(res => res.json())
+    fetch(url).then(res => res.json())                                                          //Here we are going to get the json Response
     .then(function(data){
         console.log(data.results);
         data.results.forEach(element => {
@@ -34,17 +33,19 @@ function returnMovies(url){
 
             title.innerHTML = `${element.title}`;
             image.src = IMG_PATH + element.poster_path;
+
             center.appendChild(image);
             div_card.appendChild(center);
             div_card.appendChild(title);
             div_column.appendChild(div_card);
             div_row.appendChild(div_column);
+
             main.appendChild(div_row);
         });
     })
 }
 
-form.addEventListener("submit", (e) =>{
+form.addEventListener("submit", (e) => {
     e.preventDefault();
     main.innerHTML = '';
 
@@ -54,4 +55,4 @@ form.addEventListener("submit", (e) =>{
         returnMovies(SEARCHAPI + searchItem);
         search.value = "";
     }
-})
+});
